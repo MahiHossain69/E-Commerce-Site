@@ -35,7 +35,7 @@ function SampleNextArrow(props) {
 
 
 function Newarrivals() {
-    let data = useContext(ApiData)
+    let {info,loading} = useContext(ApiData)
     const settings = {
        autoplay: true,
         
@@ -50,14 +50,19 @@ function Newarrivals() {
         <section>
             <Container>
                 <h2 className='font-sans text-[39px] font-bold text-[#262626]'>New Arrivals</h2>
+                {loading ? (
+                <h2>Loading.....</h2>
+
+                ) : (
                 <Slider {...settings}>
-                    {data.map((item) => (
+                    {info.map((item) => (
 
                         <Link to="/shop">
                             <ArrivalComponents item={item} />
                         </Link>
                     ))}
                 </Slider>
+                )}
 
             </Container>
         </section>
