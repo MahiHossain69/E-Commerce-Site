@@ -68,7 +68,7 @@ function Navbar() {
                     </div>
                     <div className="w-1/2">
                         <div className="relative">
-                            <input type='search' className='py-3 pl-2 w-full outline-none rounded-sm' placeholder='Search' />
+                            <input type='search' className='py-3 pl-2 w-full outline-none rounded-sm bg-gray-200 ' placeholder='Search' />
                             <BsSearch className='absolute top-[50%] translate-y-[-50%] right-4' />
 
                         </div>

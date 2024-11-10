@@ -4,14 +4,17 @@ import { IoIosGitCompare } from "react-icons/io";
 import { FaCartPlus } from "react-icons/fa";
 import Bag from "../assets/bag.png"
 import { ApiData } from './ContextApi';
+import { Link } from 'react-router-dom';
+
 
 function Post() {
     let { info, loading } = useContext(ApiData)
     return (
         <>
         {info.map((item)=>(
-
+            
             <div className="w-[32%]">
+                <Link to={`/shop/${item.id}`}>
                 <div className="">
                     <div className="relative group overflow-hidden">
                         <img className="w-full" src={item.thumbnail} />
@@ -34,6 +37,7 @@ function Post() {
                     </div>
                     <p className='font-sans text-[16px] font-bold text-[#262626]'>${item.price}</p>
                 </div>
+       </Link>
             </div>
         ))}
         </>
