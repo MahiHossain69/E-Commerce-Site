@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { IoIosHeart } from "react-icons/io";
 import { IoIosGitCompare } from "react-icons/io";
 import { FaCartPlus } from "react-icons/fa";
@@ -9,11 +9,32 @@ import { Link } from 'react-router-dom';
 
 function Post({allPage,activeGrid,categoryFilter}) {
     let { info, loading } = useContext(ApiData)
+    let [filterShow,setFilterShow] = useState([]);
+    let [count,setCount] = useState(true);
+
+
+    useEffect(()=>{
+    let fiveFilter = categoryFilter.slice(0, 5);
+    setFilterShow(fiveFilter);
+    },[categoryFilter]);
+
+    let handleSee = () => {
+        setFilterShow(categoryFilter);
+        setCount(false);
+      };
+      let handleSeeless = () => {
+        let fiveFilter = categoryFilter.slice(0, 5);
+        setFilterShow(fiveFilter);
+        setCount(true);
+      };
+
+
     return (
         <>
-        {categoryFilter.length > 0 ? 
+        {filterShow.length > 0 ? 
+     <>
        <div className="flex flex-wrap">
-         {categoryFilter.map((item)=>(
+         {filterShow.map((item)=>(
             
             <div className="w-[32%]">
                 <Link to={`/shop/${item.id}`}>
@@ -43,6 +64,21 @@ function Post({allPage,activeGrid,categoryFilter}) {
             </div>
         ))}
        </div>
+
+       <div className=" mx-auto mt-[20px]">
+            {count
+              ? categoryFilter.length > 5 && (
+                  <div onClick={handleSee} className="h-[50px] w-[200px] font-sans font-bold text-[14px] border-[2px] border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300 text-center pt-[13px]">
+                    <h2>See more</h2>
+                  </div>
+                )
+              : categoryFilter.length > 5 && (
+                  <div onClick={handleSeeless} className="h-[50px] w-[200px] font-sans font-bold text-[14px] border-[2px] border-[#2b2b2b] text-[#262626] bg-white transition hover:bg-black hover:text-white duration-300 text-center pt-[13px]">
+                    <h2>See Less</h2>
+                  </div>
+                )}
+          </div>
+     </>
     :
     
         <div className={`${activeGrid == "active" ? "w-[100%]" : "flex flex-wrap"}`}>
