@@ -30,6 +30,7 @@ function Shop() {
   let [priceShow, setPriceShow] = useState([]);
   let [low, setLow] = useState("");
   let [high, setHigh] = useState("");
+  let [brand, setBrand] = useState(false);
 
 
   let pageNumber = []
@@ -159,6 +160,37 @@ function Shop() {
         )}
 
       </div>
+      <div className="pr-6 pt-8">
+      <div onClick={()=> setBrand(!brand )} className="flex justify-between items-center">
+        <h2  className='font-sans text-[20px] font-bold text-[#262626] cursor-pointer'>Shop by Brand</h2>
+
+        {brand  ? <FaMinus /> : <FaPlus />
+  }
+        </div>
+        {brand  && (
+        <ul className="cursor-pointer">
+                <li
+                  onClick={() => handlePrice({ low: 0, high: 10 })}
+                  className="capitalize text-[#262626] font-sans py-1 mt-[20px] font-bold cursor-pointer"
+                >
+                  $0.00 - $9.99
+                </li>
+                <li
+                  onClick={() => handlePrice({ low: 10, high: 20 })}
+                  className="capitalize text-[#262626] font-sans py-1 mt-[20px] font-bold cursor-pointer"
+                >
+                  $10.00 - $19.99
+                </li>
+                <li
+                  onClick={() => handlePrice({ low: 20, high: 9999 })}
+                  className="capitalize text-[#262626] font-sans py-1 mt-[20px] font-bold cursor-pointer"
+                >
+                  $20.00 - $9999.99
+                </li>
+              </ul>
+        )}
+
+      </div>
       
       
       </div>
@@ -185,7 +217,7 @@ function Shop() {
       </div>
       <div className="pt-8 flex justify-end items-center gap-x-10 leading-10 ">
        <div className="">
-        <label htmlFor="sort" className='pr-3'>Sort by :</label>
+        <label htmlFor="sort" className='pr-3 font-bold'>Sort by :</label>
         <select className='w-[200px] h-[30px] text-center p-1 border-[1px] border-[#262626]' name='sort' id='sort'>
         <option value="" className=''>Price Low to High</option>
          <option value="">Price High to Low</option>
@@ -195,7 +227,7 @@ function Shop() {
        </div>
 
        <div className="">
-        <label className='pr-3'>Show :</label>
+        <label className='pr-3 font-bold'>Show :</label>
         <select  onChange={handleChange} name="show" id="show" className='w-[60px] p-1 h-[30px] border-[1px] border-[#262626]' >
         <option value="6">6</option>
         <option value="12">12</option>

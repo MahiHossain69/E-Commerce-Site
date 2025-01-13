@@ -23,7 +23,7 @@ function Header() {
         <li className='font-sans text-[16px] font-normal text-[#767676] hover:text-[#262626] hover:font-bold  duration-500 ease-in-out text-center py-2'><Link to="/shop">Shop</Link></li>
         <li  className='font-sans text-[16px] font-normal text-[#767676] hover:text-[#262626] hover:font-bold  duration-500 ease-in-out text-center py-2'><Link to="/about">About</Link></li>
         <li  className='font-sans text-[16px] font-normal text-[#767676] hover:text-[#262626] hover:font-bold  duration-500 ease-in-out text-center py-2'><Link to="/contact">Contacts</Link></li>
-        <li  className='font-sans text-[16px] font-normal text-[#767676] hover:text-[#262626] hover:font-bold  duration-500 ease-in-out text-center py-2'>Journal</li>
+        <li  className='font-sans text-[16px] font-normal text-[#767676] hover:text-[#262626] hover:font-bold  duration-500 ease-in-out text-center py-2'><Link to="/journal">Journal</Link></li>
       </ul>
     </div>
     <div className="lg:hidden" onClick={()=> setShow(!show)}>

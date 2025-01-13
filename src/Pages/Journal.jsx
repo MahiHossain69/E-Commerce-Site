@@ -4,22 +4,19 @@ import Footer from '../Components/Footer';
 import { Breadcrumb } from 'antd';
 import Container from '../Components/Container';
 
-
-function About() {
-
+function Journal() {
   return (
-    
-  <div className="">
+    <div className="">
     <Container>
     <div className="">
           <h2 className="font-sans text-[49px] font-bold text-[#262626] ">
-            About
+          Journal
           </h2>
           <Breadcrumb aria-label="Default breadcrumb example">
             <Breadcrumb.Item >
               <Link to="/" className='hover:font-bold font-sans font-normal text-[12px] text-[#000000]'> Home</Link>
             </Breadcrumb.Item>
-            <Breadcrumb.Item className='font-bold font-sans  text-[12px] text-[#000000]'> About</Breadcrumb.Item>
+            <Breadcrumb.Item className='font-bold font-sans  text-[12px] text-[#000000]'> Journal</Breadcrumb.Item>
           </Breadcrumb>
         </div>
     
@@ -42,4 +39,4 @@ function About() {
   )
 }
 
-export default About
+export default Journal

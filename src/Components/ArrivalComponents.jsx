@@ -12,7 +12,7 @@ import { FaCartPlus } from "react-icons/fa";
 function ArrivalComponents({item}) {
  
     return (
-        <div className="!w-[96%] mx-3">
+        <div className="!w-[95%] mx-2">
             <div className="">
                 <div className="">
                     <div className="relative group overflow-hidden">

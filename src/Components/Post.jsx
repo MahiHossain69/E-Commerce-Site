@@ -36,7 +36,7 @@ function Post({allPage,activeGrid,categoryFilter}) {
        <div className="flex flex-wrap">
          {filterShow.map((item)=>(
             
-            <div className="w-[32%]">
+            <div className="w-[32%] m-[5px]">
                 <Link to={`/shop/${item.id}`}>
                 <div className="">
                     <div className="relative group overflow-hidden">
@@ -85,7 +85,7 @@ function Post({allPage,activeGrid,categoryFilter}) {
 
         {allPage.map((item)=>(
             
-            <div className="w-[32%]">
+            <div className="w-[32%] m-[6px]">
                 <Link to={`/shop/${item.id}`}>
                 <div className="">
                     <div className="relative group overflow-hidden">

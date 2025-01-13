@@ -9,6 +9,7 @@ import { IoMdArrowDropdown } from "react-icons/io";
 import { IoCart } from "react-icons/io5";
 import Watch from "../assets/bswatch.png"
 import { RxCross2 } from "react-icons/rx";
+import { Link } from 'react-router-dom';
 
 
 
@@ -55,12 +56,12 @@ function Navbar() {
 
                             <div className="bg-[#262626] w-[300px] absolute left-0 top-[60px] z-[1]">
                                 <ul className='py-0'>
-                                    <li className='font-sans text-[14px] text-white font-normal pl-3 pt-3 pb-2 border-b-[1px] border-[#d8d8d8] hover:pl-6 duration-300  hover:bg-white hover:text-black hover:font-bold ease-in-out'>Accesories</li>
-                                    <li className='font-sans text-[14px] text-white font-normal pl-3 pt-3 pb-2 border-b-[1px] border-[#d8d8d8]  hover:pl-6 duration-300  hover:bg-white hover:text-black hover:font-bold ease-in-out'>Furniture</li>
-                                    <li className='font-sans text-[14px] text-white font-normal pl-3 pt-3 pb-2 border-b-[1px] border-[#D8D8D8]  hover:pl-6 duration-300  hover:bg-white hover:text-black hover:font-bold ease-in-out'>Electronics</li>
-                                    <li className='font-sans text-[14px] text-white font-normal pl-3 pt-3 pb-2 border-b-[1px] border-[#D8D8D8]  hover:pl-6 duration-300  hover:bg-white hover:text-black hover:font-bold ease-in-out'>Clothes</li>
-                                    <li className='font-sans text-[14px] text-white font-normal pl-3 pt-3 pb-2 border-b-[1px] border-[#D8D8D8]  hover:pl-6 duration-300  hover:bg-white hover:text-black hover:font-bold ease-in-out'>Bags</li>
-                                    <li className='font-sans text-[14px] text-white font-normal pl-3 pt-3 pb-2 hover:pl-6 duration-300  hover:bg-white hover:text-black hover:font-bold ease-in-out'>Home appliances</li>
+                                    <Link to="/shop"><li className='font-sans text-[14px] text-white font-normal pl-3 pt-3 pb-2 border-b-[1px] border-[#d8d8d8] hover:pl-6 duration-300  hover:bg-white hover:text-black hover:font-bold ease-in-out'>Accesories</li></Link>
+                                    <Link to="/shop"><li className='font-sans text-[14px] text-white font-normal pl-3 pt-3 pb-2 border-b-[1px] border-[#d8d8d8]  hover:pl-6 duration-300  hover:bg-white hover:text-black hover:font-bold ease-in-out'>Furniture</li></Link>
+                                    <Link to="/shop"><li className='font-sans text-[14px] text-white font-normal pl-3 pt-3 pb-2 border-b-[1px] border-[#D8D8D8]  hover:pl-6 duration-300  hover:bg-white hover:text-black hover:font-bold ease-in-out'>Electronics</li></Link>
+                                    <Link to="/shop"><li className='font-sans text-[14px] text-white font-normal pl-3 pt-3 pb-2 border-b-[1px] border-[#D8D8D8]  hover:pl-6 duration-300  hover:bg-white hover:text-black hover:font-bold ease-in-out'>Clothes</li></Link>
+                                    <Link to="/shop"><li className='font-sans text-[14px] text-white font-normal pl-3 pt-3 pb-2 border-b-[1px] border-[#D8D8D8]  hover:pl-6 duration-300  hover:bg-white hover:text-black hover:font-bold ease-in-out'>Bags</li></Link>
+                                    <Link to="/shop"><li className='font-sans text-[14px] text-white font-normal pl-3 pt-3 pb-2 hover:pl-6 duration-300  hover:bg-white hover:text-black hover:font-bold ease-in-out'>Home appliances</li></Link>
                                 </ul>
                             </div>
                         )}

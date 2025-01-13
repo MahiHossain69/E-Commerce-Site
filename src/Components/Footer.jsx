@@ -2,8 +2,18 @@ import React from 'react'
 import Logo from "../assets/logo.png";
 import {FaFacebookF, FaLinkedinIn , FaInstagram  } from "react-icons/fa";
 import Container from "./Container";
+import { Link } from 'react-router-dom';
+
+
 
 function Footer() {
+   
+
+   
+
+
+   
+
   return (
     <section className="bg-[#F5F5F3] mt-[30px] sm:py-20">
     <Container className="overflow-hidden ">
@@ -13,11 +23,11 @@ function Footer() {
           <h2 className="text-[16px] font-DMs font-bold text-black">MENU</h2>
           <div className="text-[14px] text-[#6D6D6D] font-DMs font-medium mt-3">
             <ul>
-                <a href=''><li>Home</li></a>
-           <a href=''><li className='mt-2'>Shop</li></a>
-            <a href=''><li className='mt-2'>About</li></a>
-            <a href=''><li className='mt-2'>Contact</li></a>
-            <a href=''><li className='mt-2'>Journal</li></a>
+                <Link to="/"><a href=''><li>Home</li></a> </Link>
+           <Link to="/shop"><a href=''><li className='mt-2'>Shop</li></a></Link>
+            <Link to="/about"><a href=''><li className='mt-2'>About</li></a></Link>
+            <Link to="/contact"><a href=''><li className='mt-2'>Contact</li></a></Link>
+            <Link to="/journal"><a href=''><li className='mt-2'>Journal</li></a></Link>
             </ul>
           </div>
         </div>
@@ -25,12 +35,17 @@ function Footer() {
         <div className=" mb-6 sm:mb-0 pl-5">
           <h2 className="text-[16px] font-DMs font-bold text-black">SHOP</h2>
           <div className="text-[14px] text-[#6D6D6D] font-DMs font-medium mt-3">
+           
+        
+           
+           
+           
            <ul>
-           <a href=''><li className='mt-2'>Category 1</li></a>
-           <a href=''><li className='mt-2'>Category 2</li></a>
-           <a href=''><li className='mt-2'>Category 3</li></a>
-           <a href=''><li className='mt-2'>Category 4</li></a>
-           <a href=''><li className='mt-2'>Category 5</li></a>
+           <a href=''><li className='mt-2'>Accesories </li></a>
+           <a href=''><li className='mt-2'>Furniture </li></a>
+           <a href=''><li className='mt-2'>Electronics </li></a>
+           <a href=''><li className='mt-2'>Clothes </li></a>
+           <a href=''><li className='mt-2'>Bags </li></a>
            </ul>
           </div>
         </div>
@@ -68,9 +83,9 @@ function Footer() {
      
       <div className="flex flex-col sm:flex-row justify-between items-center mt-10">
         <div className="flex gap-4 text-[20px]">
-          <a href=''><FaFacebookF className="text-lg md:text-xl" /></a>
-         <a href=''> <FaLinkedinIn  className="text-lg md:text-xl" /></a>
-         <a href=''> <FaInstagram  className="text-lg md:text-xl" /></a>
+          <a href='https://www.facebook.com/'><FaFacebookF className="text-lg md:text-xl" /></a>
+         <a href='https://www.linkedin.com/'> <FaLinkedinIn  className="text-lg md:text-xl" /></a>
+         <a href='https://www.instagram.com/'> <FaInstagram  className="text-lg md:text-xl" /></a>
         </div>
         <h2 className="text-[14px] text-[#6D6D6D] font-DMs font-medium mt-3 text-center sm:text-right">
           2024 Orebi Minimal eCommerce Figma Template by Adveits

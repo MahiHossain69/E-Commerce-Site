@@ -9,6 +9,7 @@ import ProductDetails from "./Pages/ProductDetails";
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import Cart from "./Pages/Cart";
+import Journal from "./Pages/Journal";
 
 let router = createBrowserRouter(createRoutesFromElements(
   <Route element={<Layout/>}>
@@ -18,6 +19,7 @@ let router = createBrowserRouter(createRoutesFromElements(
     <Route path="/about/" element={<About/>}></Route>
     <Route path="/cart" element={<Cart/>}></Route>
     <Route path="/contact" element={<Contact/>}></Route>
+    <Route path="/journal" element={<Journal/>}></Route>
   </Route>
 ))
 function App() {
