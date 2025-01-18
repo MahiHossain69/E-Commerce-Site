@@ -3,15 +3,16 @@ import React, { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Container from '../Components/Container'
 import Flex from '../Components/Flex'
-import { IoIosStarOutline } from "react-icons/io";
-import { IoIosStar } from "react-icons/io";
-import { IoIosStarHalf } from "react-icons/io";
+
 import { Rate } from "antd";
 import { ToastContainer, toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css"
 import { useDispatch } from 'react-redux'
 import { addToCart } from '../slice/productSlice'
+import { FaRegStarHalfStroke } from "react-icons/fa6";
 import { FaRegStar, FaStar } from "react-icons/fa";
+import { IoCartSharp } from "react-icons/io5";
+
 
 
 
@@ -21,6 +22,8 @@ function ProductDetails() {
     let productId = useParams()
     let navigate = useNavigate()
     let [singleProduct, setSingleProduct] = useState([])
+
+    let [ship, setShip] = useState(true);
     let getSingleProduct = () => {
         axios.get(`https://dummyjson.com/product/${productId.id}`).then((response) => {
             setSingleProduct(response.data)
@@ -31,9 +34,15 @@ function ProductDetails() {
     }, [])
 
     let clientRating = Array.from({ length: 5 }, (_, index) => {
-        let number = index + 0.5
-        return singleProduct.rating > index + 1 ? <IoIosStar className='text-[#ff791a]' /> : singleProduct.rating > number ? <IoIosStarHalf /> : <IoIosStarOutline />
-    })
+      let number = index + 0.5;
+      return singleProduct.rating > index + 1 ? (
+        <FaStar className="text-[#FFD881]" />
+      ) : singleProduct.rating > number ? (
+        <FaRegStarHalfStroke className="text-[#FFD881]" />
+      ) : (
+        <FaRegStar className="text-[#FFD881]" />
+      );
+    });
 
 
 
@@ -85,6 +94,7 @@ function ProductDetails() {
       setReview('');
     };
   
+  
     return (
         <div>
             <Container>
@@ -105,14 +115,15 @@ function ProductDetails() {
                 </Flex>
                 <h3 className='text-[#262626] font-bold text-[18px] font-sans pt-8'>Product</h3>
                 <div className="">
-                    <div className="flex gap-x-2 items-center">
-                        {clientRating}
-                        {/* <IoIosStar />
-                        <IoIosStar />
-                        <IoIosStar />
-                        <IoIosStarHalf />
-                        <IoIosStarOutline /> */}
-                        <span>| 1 Review </span>
+                    <div className="flex gap-x-2 font-bold items-center">
+                        {clientRating} |
+                        
+                   <div className=" font-bold">
+                   <span>
+                {singleProduct.reviews ? singleProduct.reviews.length : 0}{" "}
+                 Reviews
+              </span>
+          </div>
                     </div>
 
 
@@ -128,8 +139,9 @@ function ProductDetails() {
                     <button className="px-[20px] md:px-[40px] py-[12px] md:py-[16px] text-[10px] md:text-[12px] font-bold border-2 border-[#000] me-3 hover:bg-black hover:text-white duration-300">
                         Add to Wish List
                     </button>
-                    <button onClick={() => handleCart(singleProduct)} className="px-[20px] md:px-[40px] py-[12px] md:py-[16px] text-[10px] md:text-[12px] font-bold border-2 border-[#000] me-3 hover:bg-black hover:text-white duration-300">
-                        Add to Cart
+                    <button onClick={() => handleCart(singleProduct)} className="flex items-center  gap-[10px] px-[20px] md:px-[40px] py-[12px] md:py-[16px] text-[10px] md:text-[12px] font-bold border-2 border-[#000] me-3 hover:bg-black hover:text-white duration-300">
+                  
+                    <IoCartSharp /> Add to Cart
                     </button>
                 </div>
                 <div className="w-[50%] py-10" onClick={() => setShow(!show)}>
@@ -143,12 +155,12 @@ function ProductDetails() {
                         </p>
                     )}
                 </div>
-                <div className="w-[50%] py-10" onClick={() => setShow(!show)}>
+                <div className="w-[50%] py-10" onClick={() => setShip(!ship)}>
                     <div className="flex justify-between items-center font-bold cursor-pointer">
                         <h3>SHIPPING & RETURNS</h3>
-                        {show ? <span>-</span> : <span>+</span>}
+                        {ship ? <span>-</span> : <span>+</span>}
                     </div>
-                    {show && (
+                    {ship && (
                         <div className="">
                             <p className="font-sans font-normal text-[16px] text-[#767676] py-1">
                                 Shipping Time : {singleProduct.shippingInformation}
@@ -179,34 +191,7 @@ function ProductDetails() {
 
 
 
-                <div className="space-y-4 mt-4">
-                    {singleProduct.reviews &&
-                        singleProduct.reviews.map((review, index) => (
-                            <div
-                                key={review.id || index} // Ensure unique key if review doesn't have 'id'
-                                className="border border-gray-300 rounded-lg p-4 bg-gray-50 shadow-md hover:bg-gray-100 transition duration-300"
-                            >
-                                <div className="flex justify-between items-center">
-                                    <h4 className="font-semibold text-lg">{review.reviewerName}</h4>
-                                    <div className="flex">
-                                        {/* Loop to display stars */}
-                                        {Array.from({ length: 5 }, (_, idx) => {
-                                            const isFilled = idx < review.rating; // Check if index is less than rating
-                                            return isFilled ? (
-                                                <FaStar className="text-[#FFD881] mr-1" key={`filled-${idx}`} />
-                                            ) : (
-                                                <FaRegStar className="mr-1 text-[#FFD881]" key={`empty-${idx}`} />
-                                            );
-                                        })}
-                                    </div>
-                                </div>
-                                <p className="mt-2 text-gray-700">{review.comment}</p>
-                                <p className="text-sm text-gray-500">
-                                    {new Date(review.date).toLocaleDateString()}
-                                </p>
-                            </div>
-                        ))}
-                </div>
+               
 
 
 
@@ -240,7 +225,7 @@ function ProductDetails() {
 
       {/* Add a Review Form */}
       <div className="w-full md:w-1/2 mt-8">
-        <h3 className="heading py-[48px]">Add a Review</h3>
+        <button className="mt-[20px] mb-[70px] px-[20px] md:px-[40px] py-[12px] md:py-[16px] text-[10px] md:text-[12px] font-bold border-2 border-[#000] me-3 hover:bg-black hover:text-white duration-300">Add a Review</button>
         <form onSubmit={handleSubmit}>
           <div className="flex flex-col mb-4">
             <label
@@ -255,7 +240,7 @@ function ProductDetails() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Your name here"
-              className="border-transparent border-b border-b-[#f0f0f0] pl-0 focus:ring-transparent focus:border-transparent focus:border-b focus:border-b-[#f0f0f0] font-sans font-normal text-[14px] text-[#767676]"
+              className="  border-transparent border-b border-b-[#080808] pl-0 focus:ring-transparent focus:border-transparent focus:border-b focus:border-b-[#f0f0f0] font-sans font-normal text-[14px] text-[#767676]"
             />
           </div>
 
@@ -272,7 +257,7 @@ function ProductDetails() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Your email here"
-              className="border-transparent border-b border-b-[#f0f0f0] pl-0 focus:ring-transparent focus:border-transparent focus:border-b focus:border-b-[#f0f0f0] font-sans font-normal text-[14px] text-[#767676]"
+              className="border-transparent border-b border-b-[#000000] pl-0 focus:ring-transparent focus:border-transparent focus:border-b focus:border-b-[#f0f0f0] font-sans font-normal text-[14px] text-[#767676]"
             />
           </div>
 
@@ -287,7 +272,7 @@ function ProductDetails() {
               id="review"
               value={review}
               onChange={(e) => setReview(e.target.value)}
-              className="border-transparent border-b border-b-[#f0f0f0] pl-0 focus:ring-transparent focus:border-transparent focus:border-b focus:border-b-[#f0f0f0] font-sans font-normal text-[14px] text-[#767676] resize-none"
+              className="border-transparent border-b border-b-[#000000] pl-0 focus:ring-transparent focus:border-transparent focus:border-b focus:border-b-[#f0f0f0] font-sans font-normal text-[14px] text-[#767676] resize-none"
               rows="4"
               placeholder="Write your comment here..."
             />

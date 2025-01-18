@@ -7,21 +7,27 @@ import { BsSearch } from "react-icons/bs";
 import { FaUser } from "react-icons/fa";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { IoCart } from "react-icons/io5";
-import Watch from "../assets/bswatch.png"
 import { RxCross2 } from "react-icons/rx";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeProduct } from '../slice/productSlice';
+
 
 
 
 
 
 function Navbar() {
+    let navigate = useNavigate()
+    let dispatch = useDispatch();
+    let data = useSelector((state)=> state.product.cartItem)
     let cateRef = useRef();
     let accRef = useRef();
     let cartRef = useRef();
     let [isCateNav, setisCateNav] = useState(false);
     let [isAcc, setisAcc] = useState(false);
     let [isCart, setIsCart] = useState(false);
+    let showcartRef = useRef()
 
     useEffect(() => {
         document.addEventListener("click", (e) => {
@@ -40,8 +46,17 @@ function Navbar() {
             }else{
                 setIsCart(false)
             }
+            if(showcartRef.current.contains(e.target)){
+                setIsCart(true)
+            }
         });
-    }, [setisCateNav, setisAcc,setIsCart])
+    }, [setisCateNav, setisAcc,setIsCart]);
+
+    let handleCartPage = ()=>{
+        navigate("/cart")
+        setIsCart(false)
+    }
+   
     return (
         <section className='bg-[#F5F5F3] py-[25px]'>
             <Container>
@@ -75,13 +90,18 @@ function Navbar() {
                         </div>
                     </div>
                     <div className="w-1/4">
-                        <div className="flex justify-end gap-x-6 relative">
+                        <div className="flex justify-end gap-x-6 relative cursor-pointer">
                             <div ref={accRef} className="flex items-center">
                                 <FaUser />
                                 <IoMdArrowDropdown />
 
                             </div>
-                            <div className="" ref={cartRef}>
+                            <div className="relative cursor-pointer" ref={cartRef}>
+                            {data.length > 0 &&
+                                <div className="absolute left-[9px] top-[-8px] h-[15px] w-[15px] bg-[red] rounded-full text-white text-center leading-[15px] text-[12px]">
+                                 {data.length}
+                                </div>
+                             }
                             <IoCart />
                             </div>
 
@@ -94,44 +114,56 @@ function Navbar() {
                                     </ul>
                                 </div>
                             )}
+                            <div className="" ref={showcartRef}>
+
 
                              {isCart && (
 
 
-                            <div className="absolute right-0 top-full mt-2 w-full md:w-[360px] bg-[rgba(233,230,230,0.9)] z-[1]">
-                                <div className="flex bg-white py-4 px-5">
+                            <div className="absolute right-0 top-full mt-2 w-full md:w-[360px] bg-[rgba(255,255,255,0.9)] shadow-lg shadow-md z-[1]">
+                               {data.map((item, i)=>(
+
+                                <div className="">
+                                
+                                <div className="flex items-center bg-white py-4 px-5">
                                     <div>
-                                        <img className="w-[80px] md:w-[150px]" src={Watch} alt="Cart item" />
+                                        <img className="w-[80px] md:w-[150px]" src={item.thumbnail} alt="Cart item" />
                                     </div>
                                     <div className="flex-grow">
                                         <div className="font-DM font-bold text-[14px] ml-3">
-                                            <h3>Black Smart Watch</h3>
+                                            <h3>{item.title}</h3>
                                         </div>
                                         <div className="font-DM font-bold text-[14px] ml-3">
-                                            <h3>$44.00</h3>
+                                            <h3>${item.price} ({item.qun})</h3>
                                         </div>
                                     </div>
-                                    <div className="ms-auto text-[20px]">
+                                    <div onClick={()=> dispatch(removeProduct(i))} className="ms-auto text-[20px] cursor-pointer">
                                         <RxCross2 />
                                     </div>
                                 </div>
                                 <div className="bg-white py-4 px-5">
                                     <h5 className="text-[rgba(166,162,162,0.9)]">
-                                        Subtotal: <span className="text-black font-bold">$44.00</span>
+                                        Subtotal: <span className="text-black font-bold"> ${(item.price * item.qun).toFixed(2)}</span>
                                     </h5>
-                                    <div className="flex flex-wrap md:flex-nowrap my-5">
-                                        <button className="px-[20px] md:px-[40px] py-[12px] md:py-[16px] text-[10px] md:text-[12px] font-bold border-2 border-[#000] me-3 hover:bg-black hover:text-white duration-300">
+                                   
+                                </div>
+                                </div>
+                               ))}
+                                <div className="flex ml-[10px] flex-wrap md:flex-nowrap my-5">
+                                   <button onClick={handleCartPage} className="px-[20px] md:px-[40px] py-[12px] md:py-[16px] text-[10px] md:text-[12px] font-bold border-2 border-[#000] me-3 hover:bg-black hover:text-white duration-300">
                                             View Cart
                                         </button>
+                                       
                                         <button className="px-[20px] md:px-[40px] py-[12px] md:py-[16px] text-[10px] md:text-[12px] font-bold border-2 border-[#000] me-3 hover:bg-black hover:text-white duration-300">
                                             Check Out
                                         </button>
+                                       
                                     </div>
-                                </div>
 
 
                             </div>
                              )}
+                            </div>
                         </div>
                     </div>
                 </Flex>
@@ -139,5 +171,10 @@ function Navbar() {
         </section>
     )
 }
+
+
+
+
+
 
 export default Navbar
