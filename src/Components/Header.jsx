@@ -15,7 +15,9 @@ function Header() {
      <Container>
     <Flex className="justify-between items-center">
     <div className="w-1/4">
-      <img src={Logo}></img>
+    <Link to="/">
+    <img src={Logo}></img>
+    </Link>
     </div>
     <div className='w-3/4'>
       <ul className={`lg:flex lg:static absolute right-0 top-0 justify-center gap-x-[20px] ${show ? ' w-full right-[0] duration-300 ease-in-out top-[50px]' : ' right-[-100px] top-[50px]'}`}>

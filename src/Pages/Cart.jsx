@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Container from "../Components/Container";
 import { Link } from 'react-router-dom';
 import { IoIosArrowForward } from "react-icons/io";
@@ -7,12 +7,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { productDecrement, productIncerment, removeProduct } from '../slice/productSlice';
 import { motion } from "framer-motion";
 import emptyCart from "../assets/emptycart.png"
+import { ApiData } from '../Components/ContextApi';
 
 
 
 
 function Cart() {
-
+  let { info, Loading } = useContext(ApiData)
   let cartItem = useSelector((state) => state.product.cartItem);
   let cartInfo = useSelector((state) => state.product.cartItem)
   let dispatch = useDispatch()
@@ -25,8 +26,15 @@ function Cart() {
   }
   let handlePremove = (i) => {
     dispatch(removeProduct(i))
-
   }
+  let { totalPrice, totalQuantity } = cartInfo.reduce((acc, item) => {
+    acc.totalPrice += item.price * item.qun
+    acc.totalQuantity += item.qun
+
+    return acc
+  }, { totalPrice: 0, totalQuantity: 0 })
+
+
   return (
     <section>
       <section className="py-[55px]">
@@ -141,7 +149,7 @@ function Cart() {
               className="flex flex-col mdl:flex-row justify-center items-center gap-4 pb-20"
             >
               <div>
-                <img className="w-80 rounded-lg p-4 mx-auto" src={emptyCart} alt="emptyCart"/>
+                <img className="w-80 rounded-lg p-4 mx-auto" src={emptyCart} alt="emptyCart" />
               </div>
               <div className="max-w-[500px] p-4 py-8 bg-white flex gap-4 flex-col items-center rounded-md shadow-lg">
                 <h1 className="font-titleFont text-xl font-bold uppercase">
@@ -161,6 +169,49 @@ function Cart() {
           )}
 
 
+          <div className="flex justify-end">
+            <div className="w-[30%]">
+              <h2 className='text-end  text-[20px] font-sans font-bold text-black'>Carts Details</h2>
+              <div className="flex flex-col">
+                <div className="-m-1.5 overflow-x-auto">
+                  <div className="p-1.5 min-w-full inline-block align-middle">
+                    <div className="overflow-hidden">
+                      <table className="min-w-full divide-y divide-gray-200">
+
+                        <tbody className="divide-y divide-gray-200">
+                          <tr>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-black">Quantity</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{totalQuantity}</td>
+
+                          </tr>
+
+
+
+                        </tbody>
+                        <tbody className="divide-y divide-gray-200">
+                          <tr>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm font-bold text-black">Total</td>
+                            <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">${totalPrice.toFixed(2)}</td>
+
+                          </tr>
+
+
+
+                        </tbody>
+                      </table>
+                     <div className="text-end">
+                     <Link to="/checkout">
+                     <button className="mt-[20px] px-[20px] md:px-[40px] py-[12px] md:py-[16px] text-[10px] md:text-[12px] font-bold border-2 border-[#000] me-3 hover:bg-black hover:text-white duration-300">
+                       Proceed to Checkout
+                      </button>
+                     </Link>
+                     </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
 
 
 

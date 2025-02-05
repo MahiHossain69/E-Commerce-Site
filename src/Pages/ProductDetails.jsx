@@ -12,6 +12,7 @@ import { addToCart } from '../slice/productSlice'
 import { FaRegStarHalfStroke } from "react-icons/fa6";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { IoCartSharp } from "react-icons/io5";
+import { IoIosArrowForward } from 'react-icons/io'
 
 
 
@@ -31,7 +32,7 @@ function ProductDetails() {
     }
     useEffect(() => {
         getSingleProduct()
-    }, [])
+    }, [productId])
 
     let clientRating = Array.from({ length: 5 }, (_, index) => {
       let number = index + 0.5;
@@ -98,7 +99,15 @@ function ProductDetails() {
     return (
         <div>
             <Container>
-                <h2 className='text-[#262626] font-normal text-[18px] font-sans pt-8'><Link to="/">Home</Link>  &#62; <Link to="/shop">Products</Link> </h2>
+                  <div className="flex items-center py-4">
+                            <h2 className="font-sans font-normal text-[12px] text-[#767676] ">
+                              <Link to="/" className='hover:font-bold text-black'>Home</Link>
+                            </h2>
+                            <IoIosArrowForward />
+                            <h2 className="font-sans font-bold text-[12px] text-[#000000] ">
+                              Product
+                            </h2>
+                          </div>
 
                 <Flex className="justify-between pt-8 flex-wrap">
                     {singleProduct?.images?.map((item) => (
@@ -113,7 +122,7 @@ function ProductDetails() {
 
 
                 </Flex>
-                <h3 className='text-[#262626] font-bold text-[18px] font-sans pt-8'>Product</h3>
+                <h3 className='font-bold font-sans  text-[12px] text-[#000000]'>Product</h3>
                 <div className="">
                     <div className="flex gap-x-2 font-bold items-center">
                         {clientRating} |
